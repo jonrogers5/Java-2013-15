@@ -1,0 +1,40 @@
+import java.io.*;
+import java.net.*;
+public class Taxi{
+	public static boolean boolexit = false;
+	public static void main(String[] args){
+		String IP = null;
+		if (args.length > 1)
+			IP = args[1];
+
+		TaxiThread taxithread = new TaxiThread(Integer.parseInt(args[0]), IP);
+		Thread thread = new Thread(taxithread);
+		thread.start();
+		
+		while (!boolexit){
+			try{
+				ServerSocket toDispatch = new ServerSocket(8000 + taxithread.id);
+				Socket incoming = toDispatch.accept();
+				DataInputStream dis = new DataInputStream(incoming.getInputStream());
+				DataOutputStream dos = new DataOutputStream(incoming.getOutputStream());
+			
+				dis.readBoolean();
+				int status = taxithread.getStatus();
+				dos.writeInt(status);
+
+				byte data[] = new byte[4];
+			
+				if (status == 0){
+					dis.read(data);
+					Location orig = Location.toLocation(data);
+					dis.read(data);
+					Location dest = Location.toLocation(data);
+					taxithread.call(orig, dest);
+				}
+				incoming.close();
+				toDispatch.close();
+			}
+			catch (Exception e){}
+		}
+	}
+}

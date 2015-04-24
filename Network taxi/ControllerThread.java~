@@ -1,0 +1,34 @@
+import java.io.*;
+import java.net.*;
+
+public class ControllerThread implements Runnable{
+	Socket incoming;
+	int area;
+	Controller controller;
+	public ControllerThread(Socket incoming,Controller controller ,int area){
+		this.incoming = incoming;
+		this.area = area;
+		this.controller = controller;
+	}	
+	public void run(){
+		try{
+			DataOutputStream dos = new DataOutputStream(incoming.getOutputStream());
+			DataInputStream dis = new DataInputStream(incoming.getInputStream());
+			Location ol, nl, returnloc;
+			byte location[] = new byte[4];
+
+			while (true){
+			dis.read(location);
+			ol = Location.toLocation(location);
+			dis.read(location);
+			nl = Location.toLocation(location);
+			returnloc = controller.update(ol, nl, 0);
+			dos.write(returnloc.printAsBytes());
+			}
+		}
+		catch (Exception e){
+			controller.removeTaxi(area);
+		}
+	}
+
+}
