@@ -1,0 +1,18 @@
+!SESSION 2008-02-29 23:27:26.202 -----------------------------------------------
+eclipse.buildId=M20070212-1330
+java.version=1.6.0_03
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=linux, ARCH=x86, WS=gtk, NL=en_US
+Command-line arguments:  -data /home/j/Desktop/Documents/cs/oop/Taxicab -os linux -ws gtk -arch x86
+
+!ENTRY org.eclipse.osgi 2 1 2008-02-29 23:27:27.866
+!MESSAGE NLS missing message: initializer_error in: org.eclipse.core.internal.runtime.messages
+
+!ENTRY org.eclipse.osgi 2 1 2008-02-29 23:27:27.867
+!MESSAGE NLS missing message: fileInitializer_fileNotFound in: org.eclipse.core.internal.runtime.messages
+
+!ENTRY org.eclipse.osgi 2 1 2008-02-29 23:27:27.867
+!MESSAGE NLS missing message: fileInitializer_IOError in: org.eclipse.core.internal.runtime.messages
+
+!ENTRY org.eclipse.osgi 2 1 2008-02-29 23:27:27.867
+!MESSAGE NLS missing message: fileInitializer_missingFileName in: org.eclipse.core.internal.runtime.messages
